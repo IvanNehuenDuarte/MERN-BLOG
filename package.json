@@ -1,0 +1,16 @@
+{
+  "name": "mern-blog",
+  "version": "1.0.0",
+  "description": "Este es un proyecto de aplicación blog la cual voy a usarla como un repositorio propio donde voy a subir información relacionada a todos los lenguajes, frameworks, corrección de errores y demás cosas que vaya aprendiendo, de modo que cuando necesite pueda encontrarlo rapido.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.2"
+  }
+}
