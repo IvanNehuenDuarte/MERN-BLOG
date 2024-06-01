@@ -21,6 +21,17 @@ app.use(express.json());
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 
+// MIDDLEWARE
+app.use((error, req, res, next) => {
+  const statusCode = res.statusCode || 500;
+  const message = res.message || "Internal Server Error";
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
