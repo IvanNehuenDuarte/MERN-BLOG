@@ -23,8 +23,8 @@ app.use("/api/auth", authRoute);
 
 // MIDDLEWARE
 app.use((error, req, res, next) => {
-  const statusCode = res.statusCode || 500;
-  const message = res.message || "Internal Server Error";
+  const statusCode = error.statusCode || 500;
+  const message = error.message || "Internal Server Error";
   res.status(statusCode).json({
     success: false,
     statusCode,
