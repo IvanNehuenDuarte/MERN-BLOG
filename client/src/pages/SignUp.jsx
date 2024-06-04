@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
+import OAuth from "../components/OAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -49,9 +50,9 @@ export default function SignUp() {
         <div className="flex-1">
           <Link to="/" className="font-bold text-4xl dark:text-white">
             <span className="px-2 py-1 bg-gradient-to-r from-teal-300 via-teal-500 to-teal-800 rounded-lg text-white">
-              Programmer{" "}
+              CODE{" "}
             </span>
-            Blog
+            PLANET
           </Link>
           <p className="text-sm mt-5">
             This is a demo project. You can sign up with your email and password
@@ -102,6 +103,7 @@ export default function SignUp() {
                 "Sign Up"
               )}
             </Button>
+            <OAuth />
           </form>
           <div className="flex gap-2 text-sm mt-5">
             <span>Have an account? </span>
