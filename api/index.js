@@ -3,6 +3,7 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
+import postRoutes from "./routes/post.route.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/post", postRoutes);
 
 // MIDDLEWARE
 app.use((error, req, res, next) => {
