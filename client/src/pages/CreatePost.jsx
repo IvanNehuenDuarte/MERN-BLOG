@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import {
   getDownloadURL,
   getStorage,
@@ -12,12 +10,18 @@ import { app } from "../firebase.js";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useNavigate } from "react-router-dom";
+// Import Froala Editor and CSS Froala
+import FroalaEditor from "react-froala-wysiwyg";
+import "froala-editor/js/froala_editor.pkgd.min.js";
+import "froala-editor/css/froala_editor.pkgd.min.css";
+import "froala-editor/css/froala_style.min.css";
+import "froala-editor/css/themes/dark.min.css";
 
 export default function CreatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ content: "" });
   const [publishError, setPublishError] = useState(null);
 
   const navigate = useNavigate();
@@ -144,22 +148,29 @@ export default function CreatePost() {
           </Button>
         </div>
         {imageUploadError && <Alert color="failure">{imageUploadError}</Alert>}
-        {formData.image && (
-          <img
-            src={formData.image}
-            alt="upload"
-            className="w-full h-72 object-cover"
-          />
-        )}
-        <ReactQuill
-          theme="snow"
-          placeholder="Write something..."
-          className="h-72 mb-12"
-          required
-          onChange={(value) => {
-            setFormData({ ...formData, content: value });
+        <div className="">
+          {formData.image && (
+            <img
+              src={formData.image}
+              alt="upload"
+              className="w-full h-72 object-cover"
+            />
+          )}
+        </div>
+
+        <FroalaEditor
+          tag="textarea"
+          config={{
+            theme: "dark",
+            placeholderText: "Edit Your Content Here!",
+            charCounterCount: false,
+          }}
+          model={formData.content}
+          onModelChange={(content) => {
+            setFormData({ ...formData, content });
           }}
         />
+
         <Button type="submit" gradientDuoTone="purpleToPink">
           Publish
         </Button>
