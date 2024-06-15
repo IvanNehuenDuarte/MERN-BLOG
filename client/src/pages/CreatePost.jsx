@@ -157,7 +157,6 @@ export default function CreatePost() {
             />
           )}
         </div>
-
         <FroalaEditor
           tag="textarea"
           config={{

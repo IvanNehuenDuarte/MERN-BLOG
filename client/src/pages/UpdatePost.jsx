@@ -22,7 +22,12 @@ export default function UpdatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    title: "",
+    category: "uncategorized",
+    content: "",
+    image: "",
+  });
   const [publishError, setPublishError] = useState(null);
   const { postId } = useParams();
 
@@ -30,25 +35,32 @@ export default function UpdatePost() {
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
-    try {
-      const fetchPost = async () => {
+    const fetchPost = async () => {
+      try {
         const res = await fetch(`/api/post/getposts?postId=${postId}`);
         const data = await res.json();
+
         if (!res.ok) {
-          console.log(data.message);
           setPublishError(data.message);
           return;
         }
-        if (res.ok) {
-          setPublishError(null);
-          setFormData(data.posts[0]);
-        }
-      };
+        const post = await data.posts[0];
 
-      fetchPost();
-    } catch (error) {
-      console.log(error.message);
-    }
+        if (res.ok) {
+          setFormData({
+            id: postId,
+            title: post.title || "",
+            category: (post.category || "").toLowerCase(),
+            content: post.content || "",
+            image: post.image || "",
+          });
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    fetchPost();
   }, [postId]);
 
   const handleUpdloadImage = async () => {
@@ -91,7 +103,7 @@ export default function UpdatePost() {
     e.preventDefault();
     try {
       const res = await fetch(
-        `/api/post/updatepost/${formData._id}/${currentUser._id}`,
+        `/api/post/updatepost/${formData.id}/${currentUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -108,7 +120,9 @@ export default function UpdatePost() {
 
       if (res.ok) {
         setPublishError(null);
-        navigate(`/post/${data.slug}`);
+        if (data.slug) {
+          navigate(`/post/${data.slug}`);
+        }
       }
     } catch (error) {
       setPublishError("Something went wrong");
@@ -138,8 +152,11 @@ export default function UpdatePost() {
           >
             <option value="uncategorized">Select a category</option>
             <option value="javascript">JavaScript</option>
-            <option value="reactjs">React.js</option>
-            <option value="nextjs">Next.js</option>
+            <option value="reactjs">ReactJs</option>
+            <option value="nodejs">NodeJs</option>
+            <option value="express">Express</option>
+            <option value="threejs">ThreeJs</option>
+            <option value="coffee">Coffee</option>
           </Select>
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
