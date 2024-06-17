@@ -109,7 +109,7 @@ export default function DashPosts() {
                   </Table.Cell>
 
                   <Table.Cell>
-                    <Link to={`/posts/${post.slug}`}>
+                    <Link to={`/post/${post.slug}`}>
                       <img
                         src={post.image}
                         alt={post.title}
@@ -121,7 +121,7 @@ export default function DashPosts() {
                   <Table.Cell>
                     <Link
                       className="font-medium text-gray-900 dark:text-white"
-                      to={`/posts/${post.slug}`}
+                      to={`/post/${post.slug}`}
                     >
                       {post.title}
                     </Link>

@@ -1,4 +1,5 @@
 /* Import Froala Editor styles */
+@import "froala-editor/css/plugins/code_view.min.css";
 @import "froala-editor/css/froala_editor.pkgd.min.css";
 @import "froala-editor/css/froala_style.min.css";
 @import "froala-editor/css/themes/dark.min.css";
@@ -11,7 +12,105 @@ body {
   height: 100vh;
 }
 
-@media (forced-colors: active) {
+.fr-element h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.fr-element h2 {
+  font-size: 2.25em;
+  font-weight: bold;
+}
+
+.fr-element h3 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.fr-element h4 {
+  font-size: 1.75em;
+  font-weight: bold;
+}
+
+.fr-element pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.fr-element pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.post-content pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.post-content a {
+  color: rgb(73, 149, 199);
+  text-decoration: none;
+}
+
+.post-content a:hover {
+  text-decoration: underline;
+}
+
+.post-content h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.post-content h2 {
+  font-size: 2.25em;
+  font-weight: bold;
+}
+
+.post-content h3 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.post-content h4 {
+  font-size: 1.75em;
+  font-weight: bold;
+}
+
+.post-content p {
+  margin-bottom: 0.5rem;
+}
+
+.dark .post-content a {
+  color: #47b063;
+}
+
+.post-content #isPasted {
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+/* @media (forced-colors: active) {
   * {
     forced-color-adjust: auto;
   }
@@ -22,4 +121,4 @@ body {
     background-color: #333;
     color: #fff;
   }
-}
+} */

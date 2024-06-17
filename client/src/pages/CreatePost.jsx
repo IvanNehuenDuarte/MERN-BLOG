@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
 import {
   getDownloadURL,
@@ -13,9 +13,12 @@ import { useNavigate } from "react-router-dom";
 // Import Froala Editor and CSS Froala
 import FroalaEditor from "react-froala-wysiwyg";
 import "froala-editor/js/froala_editor.pkgd.min.js";
+import "froala-editor/js/plugins/paragraph_format.min.js";
+import "froala-editor/js/plugins/code_view.min.js";
 import "froala-editor/css/froala_editor.pkgd.min.css";
 import "froala-editor/css/froala_style.min.css";
 import "froala-editor/css/themes/dark.min.css";
+import "froala-editor/css/plugins/code_view.min.css";
 
 export default function CreatePost() {
   const [file, setFile] = useState(null);
