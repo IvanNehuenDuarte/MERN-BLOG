@@ -1,10 +1,11 @@
 import express from "express";
-import "dotenv/config";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
+import "dotenv/config";
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
 import postRoutes from "./routes/post.route.js";
-import cookieParser from "cookie-parser";
+import commentRoutes from "./routes/comment.route.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoutes);
+app.use("/api/comment", commentRoutes);
 
 // MIDDLEWARE
 app.use((error, req, res, next) => {
