@@ -12,6 +12,38 @@ body {
   height: 100vh;
 }
 
+.bg-transparent-light {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Fondo blanco con 80% de opacidad */
+  backdrop-filter: blur(10px); /* Efecto borroso */
+}
+
+.bg-transparent-dark {
+  background-color: rgba(
+    45,
+    55,
+    72,
+    0.8
+  ) !important; /* Fondo negro con 80% de opacidad */
+  backdrop-filter: blur(10px); /* Efecto borroso */
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-gray-700 {
+  background-color: #2d3748; /* Fondo gris oscuro */
+}
+
+.transition-colors {
+  transition: background-color 0.3s, backdrop-filter 0.3s;
+}
+
 .fr-element h1 {
   font-size: 2.5em;
   font-weight: bold;

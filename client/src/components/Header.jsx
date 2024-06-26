@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -13,6 +13,7 @@ export default function Header() {
 
   const { currentUser } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -32,8 +33,30 @@ export default function Header() {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setIsScrolled(offset > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <Navbar className="border-b-2">
+    <Navbar
+      className={`fixed w-full top-0 z-50 shadow-md transition-colors duration-300 ${
+        isScrolled
+          ? theme === "light"
+            ? "bg-transparent-light"
+            : "bg-transparent-dark"
+          : theme === "light"
+          ? "bg-white"
+          : "bg-gray-700"
+      }`}
+    >
       <Link
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
