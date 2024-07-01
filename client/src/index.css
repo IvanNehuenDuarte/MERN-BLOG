@@ -32,7 +32,7 @@ body {
   backdrop-filter: blur(10px); /* Efecto borroso */
 }
 
-.bg-white {
+.nav.bg-white {
   background-color: white;
 }
 
