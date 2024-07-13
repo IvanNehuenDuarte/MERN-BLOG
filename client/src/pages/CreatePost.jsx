@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
+import { Alert, Button, FileInput, Select, TextInput, Modal } from "flowbite-react";
 import {
   getDownloadURL,
   getStorage,
@@ -24,8 +24,19 @@ export default function CreatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
-  const [formData, setFormData] = useState({ content: "" });
+  const [formData, setFormData] = useState({ content: "", categories: [] });
   const [publishError, setPublishError] = useState(null);
+  const [categories, setCategories] = useState([
+    "Uncategorized",
+"JavaScript",
+"ReactJs",
+"NodeJs",
+"Express",
+"ThreeJs",
+"Coffee",
+  ])
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [newCategory, setNewCategory] = useState("")
 
   const navigate = useNavigate();
 
@@ -95,8 +106,27 @@ export default function CreatePost() {
     }
   };
 
+  const handleAddCategory = async () => {
+    if (newCategory.trim()) {
+      setCategories([...categories, newCategory.trim()])
+      setFormData({ ...formData, categories: [...formData.categories, newCategory.trim()] });
+      setNewCategory("")
+      setIsModalOpen(false);
+    }
+
+    try {
+      await fetch('/api/category/addcategory', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newCategory.trim() })
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
-    <div className="p-3 max-w-3xl mx-auto min-h-screen">
+    <div className="p-3 max-w-3xl mx-auto min-h-screen pt-14">
       <h1 className="text-center text-3xl my-7 font-semibold">CreatePost</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
@@ -112,16 +142,18 @@ export default function CreatePost() {
           />
           <Select
             onChange={(e) => {
-              setFormData({ ...formData, category: e.target.value });
+              if (e.target.value === "addCategory") {
+                setIsModalOpen(true)
+              } else {
+                setFormData({ ...formData, category: e.target.value})
+              }
             }}
           >
-            <option value="uncategorized">Select a category</option>
-            <option value="javascript">JavaScript</option>
-            <option value="reactjs">ReactJs</option>
-            <option value="nodejs">NodeJs</option>
-            <option value="express">Express</option>
-            <option value="threejs">ThreeJs</option>
-            <option value="coffee">Coffee</option>
+            <option value='uncategorized'>Select a category</option>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>{category}</option>
+            ))}
+          <option value="addCategory">Add Category</option>
           </Select>
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
@@ -177,6 +209,15 @@ export default function CreatePost() {
           Publish
         </Button>
       </form>
+      <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Modal.Header>Add New Category</Modal.Header>
+        <Modal.Body>
+          <TextInput type="text" placeholder="New Category" value={newCategory} onChange={(e) => setNewCategory(e.target.value)}/>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleAddCategory}>Add</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

@@ -44,7 +44,7 @@ export default function About() {
               objetivo es crear una comunidad donde todos podamos aprender unos
               de otros y crecer juntos. No soy un experto, pero estoy
               comprometido a mejorar cada día, y espero que mis experiencias
-              puedan ser útiles para ti.
+              puedan ser útiles para todos.
             </p>
           </div>
         </div>
