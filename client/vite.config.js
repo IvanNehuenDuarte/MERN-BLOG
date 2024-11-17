@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
       open: true,
       proxy: {
         "/api": {
-          target: env.VITE_BACK_URL || "http://localhost:5000",
+          target: env.VITE_BACK_URL,
           secure: false,
         },
       },
