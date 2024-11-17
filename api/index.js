@@ -31,21 +31,10 @@ app.use("/api/comment", commentRoutes);
 app.use("/api/category", categoryRoute);
 
 // MIDDLEWARE
-const allowedOrigins = [
-  "https://mate-script.vercel.app",
-  "http://localhost:5173", // Para desarrollo local
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (allowedOrigins.includes(origin) || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
+    origin: "https://mate-script.vercel.app", // Reemplaza con tu dominio de frontend
+    credentials: true, // Permite cookies si son necesarias
   })
 );
 
