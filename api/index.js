@@ -31,12 +31,13 @@ app.use("/api/comment", commentRoutes);
 app.use("/api/category", categoryRoute);
 
 // MIDDLEWARE
-app.use(
-  cors({
-    origin: "https://mate-script.vercel.app", // Reemplaza con tu dominio de frontend
-    credentials: true, // Permite cookies si son necesarias
-  })
-);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://mate-script.vercel.app");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500;
