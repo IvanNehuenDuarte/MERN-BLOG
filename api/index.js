@@ -7,6 +7,7 @@ import authRoute from "./routes/auth.route.js";
 import postRoutes from "./routes/post.route.js";
 import commentRoutes from "./routes/comment.route.js";
 import categoryRoute from "./routes/category.route.js";
+import cors from "cors";
 
 const app = express();
 
@@ -30,10 +31,20 @@ app.use("/api/comment", commentRoutes);
 app.use("/api/category", categoryRoute);
 
 // MIDDLEWARE
-const cors = require("cors");
+const allowedOrigins = [
+  "https://mate-script.vercel.app",
+  "http://localhost:5173", // Para desarrollo local
+];
+
 app.use(
   cors({
-    origin: "https://mate-script.vercel.app",
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
