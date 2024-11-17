@@ -10,7 +10,7 @@ import { Button, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 // URL
-const API_URL = import.meta.env.VITE_BACK_URL;
+const API_URL = import.meta.env.VITE_BACK_URL.replace(/\/$/, "");
 
 export default function DashboardComp() {
   const [users, setUsers] = useState([]);

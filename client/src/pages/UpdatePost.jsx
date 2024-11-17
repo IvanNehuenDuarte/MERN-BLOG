@@ -21,7 +21,7 @@ import "froala-editor/css/themes/dark.min.css";
 import "froala-editor/css/plugins/code_view.min.css";
 
 // URL
-const API_URL = import.meta.env.VITE_BACK_URL;
+const API_URL = import.meta.env.VITE_BACK_URL.replace(/\/$/, "");
 
 export default function UpdatePost() {
   const [file, setFile] = useState(null);

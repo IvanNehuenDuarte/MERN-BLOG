@@ -6,7 +6,7 @@ import CommentSection from "../components/CommentSection.jsx";
 import PostCard from "../components/PostCard.jsx";
 
 // URL
-const API_URL = import.meta.env.VITE_BACK_URL;
+const API_URL = import.meta.env.VITE_BACK_URL.replace(/\/$/, "");
 
 export default function PostPage() {
   const { postSlug } = useParams();

@@ -8,7 +8,7 @@ import { toggleTheme } from "../redux/theme/themeSlice";
 import { signOutSuccess } from "../redux/user/userSlice.js";
 
 // URL
-const API_URL = import.meta.env.VITE_BACK_URL;
+const API_URL = import.meta.env.VITE_BACK_URL.replace(/\/$/, "");
 
 export default function Header() {
   const path = useLocation().pathname;

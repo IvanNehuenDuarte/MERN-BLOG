@@ -4,7 +4,8 @@ import { FaThumbsUp } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Button, Textarea } from "flowbite-react";
 
-const API_URL = import.meta.env.VITE_BACK_URL;
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL.replace(/\/$/, "");
 
 export default function Comment({ comment, onLike, onEdit, onDelete }) {
   const [user, setUser] = useState({});

@@ -4,7 +4,7 @@ import { Button, Modal, Table } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 // URL
-const API_URL = import.meta.env.VITE_BACK_URL;
+const API_URL = import.meta.env.VITE_BACK_URL.replace(/\/$/, "");
 
 export default function DashComments() {
   const { currentUser } = useSelector((state) => state.user);

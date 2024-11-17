@@ -4,7 +4,7 @@ import CallToAction from "../components/CallToAction.jsx";
 import PostCard from "../components/PostCard.jsx";
 
 // URL
-const API_URL = import.meta.env.VITE_BACK_URL;
+const API_URL = import.meta.env.VITE_BACK_URL.replace(/\/$/, "");
 
 export default function Home() {
   const [posts, setPosts] = useState([]);

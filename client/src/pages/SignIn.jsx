@@ -10,7 +10,7 @@ import {
 import OAuth from "../components/OAuth.jsx";
 
 // URL
-const API_URL = import.meta.env.VITE_BACK_URL;
+const API_URL = import.meta.env.VITE_BACK_URL.replace(/\/$/, "");
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PostCard from "../components/PostCard";
 
 // URL
-const API_URL = import.meta.env.VITE_BACK_URL;
+const API_URL = import.meta.env.VITE_BACK_URL.replace(/\/$/, "");
 
 export default function Search() {
   const [sidebarData, setSidebarData] = useState({

@@ -8,7 +8,7 @@ import { app } from "../firebase";
 import { signInSuccess } from "../redux/user/userSlice.js";
 
 // URL
-const API_URL = import.meta.env.VITE_BACK_URL;
+const API_URL = import.meta.env.VITE_BACK_URL.replace(/\/$/, "");
 
 export default function OAuth() {
   const auth = getAuth(app);
