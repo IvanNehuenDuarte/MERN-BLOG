@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { Button, Modal, Table } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL;
+
 export default function DashComments() {
   const { currentUser } = useSelector((state) => state.user);
 
@@ -14,7 +17,7 @@ export default function DashComments() {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await fetch(`/api/comment/getcomments`);
+        const res = await fetch(`${API_URL}/api/comment/getcomments`);
         const data = await res.json();
 
         if (res.ok) {
@@ -38,7 +41,7 @@ export default function DashComments() {
 
     try {
       const res = await fetch(
-        `/api/comment/getcomments?startIndex=${startIndex}`
+        `${API_URL}/api/comment/getcomments?startIndex=${startIndex}`
       );
 
       if (!res.ok) {
@@ -61,7 +64,7 @@ export default function DashComments() {
     setShowModal(false);
     try {
       const res = await fetch(
-        `/api/comment/deleteComment/${commentsIdToDelete}`,
+        `${API_URL}/api/comment/deleteComment/${commentsIdToDelete}`,
         {
           method: "DELETE",
         }

@@ -30,6 +30,14 @@ app.use("/api/comment", commentRoutes);
 app.use("/api/category", categoryRoute);
 
 // MIDDLEWARE
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "https://mate-script.vercel.app/",
+    credentials: true,
+  })
+);
+
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500;
   const message = error.message || "Internal Server Error";
@@ -39,14 +47,6 @@ app.use((error, req, res, next) => {
     message,
   });
 });
-
-const cors = require("cors");
-app.use(
-  cors({
-    origin: "https://mate-script.vercel.app/", // Cambia por la URL de tu frontend
-    credentials: true,
-  })
-);
 
 // Ruta raíz
 app.get("/", (req, res) => {

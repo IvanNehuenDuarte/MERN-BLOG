@@ -7,6 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { signOutSuccess } from "../redux/user/userSlice.js";
 
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL;
+
 export default function Header() {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
@@ -28,7 +31,7 @@ export default function Header() {
 
   const handleSignOut = async () => {
     try {
-      const res = await fetch("/api/user/signout", {
+      const res = await fetch(`${API_URL}/api/user/signout`, {
         method: "POST",
       });
 

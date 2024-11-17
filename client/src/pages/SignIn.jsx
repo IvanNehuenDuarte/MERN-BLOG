@@ -9,6 +9,9 @@ import {
 } from "../redux/user/userSlice.js";
 import OAuth from "../components/OAuth.jsx";
 
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL;
+
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error: errorMessage } = useSelector((state) => state.user);
@@ -27,7 +30,7 @@ export default function SignIn() {
     try {
       // Intenta logeo
       dispatch(signInStart());
-      const res = await fetch("/api/auth/signin", {
+      const res = await fetch(`${API_URL}/api/auth/signin`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(formData),

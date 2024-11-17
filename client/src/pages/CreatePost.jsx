@@ -27,6 +27,9 @@ import "froala-editor/css/froala_style.min.css";
 import "froala-editor/css/themes/dark.min.css";
 import "froala-editor/css/plugins/code_view.min.css";
 
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL;
+
 export default function CreatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -83,7 +86,7 @@ export default function CreatePost() {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/post/create", {
+      const res = await fetch(`${API_URL}/api/post/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -108,7 +111,7 @@ export default function CreatePost() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch("/api/category/getcategories");
+        const res = await fetch(`${API_URL}/api/category/getcategories`);
         const data = await res.json();
         if (Array.isArray(data.categories)) {
           setCategories(data.categories);
@@ -127,7 +130,7 @@ export default function CreatePost() {
     if (newCategory.trim()) {
       try {
         // Enviar nueva categoría al backend
-        const res = await fetch("/api/category/addcategory", {
+        const res = await fetch(`${API_URL}/api/category/addcategory`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name: newCategory.trim() }),

@@ -20,6 +20,9 @@ import "froala-editor/css/froala_style.min.css";
 import "froala-editor/css/themes/dark.min.css";
 import "froala-editor/css/plugins/code_view.min.css";
 
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL;
+
 export default function UpdatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -40,7 +43,9 @@ export default function UpdatePost() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await fetch(`/api/post/getposts?postId=${postId}`);
+        const res = await fetch(
+          `${API_URL}/api/post/getposts?postId=${postId}`
+        );
         const data = await res.json();
 
         if (!res.ok) {
@@ -69,7 +74,7 @@ export default function UpdatePost() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch("/api/category/getcategories"); // Llama a la nueva ruta
+        const res = await fetch(`${API_URL}/api/category/getcategories`); // Llama a la nueva ruta
         const data = await res.json();
         setCategories(data.categories); // Actualiza el estado con las categorías del backend
       } catch (error) {
@@ -120,7 +125,7 @@ export default function UpdatePost() {
     e.preventDefault();
     try {
       const res = await fetch(
-        `/api/post/updatepost/${formData.id}/${currentUser._id}`,
+        `${API_URL}/api/post/updatepost/${formData.id}/${currentUser._id}`,
         {
           method: "PUT",
           headers: {

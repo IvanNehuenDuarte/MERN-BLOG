@@ -6,6 +6,9 @@ import { Alert, Button, Modal, Textarea } from "flowbite-react";
 import Comment from "./Comment.jsx";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL;
+
 export default function CommentSection({ postId }) {
   const { currentUser } = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
@@ -23,7 +26,7 @@ export default function CommentSection({ postId }) {
     }
 
     try {
-      const res = await fetch(`/api/comment/create`, {
+      const res = await fetch(`${API_URL}/api/comment/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +53,9 @@ export default function CommentSection({ postId }) {
   useEffect(() => {
     const getComments = async () => {
       try {
-        const res = await fetch(`/api/comment/getPostComments/${postId}`);
+        const res = await fetch(
+          `${API_URL}/api/comment/getPostComments/${postId}`
+        );
 
         if (res.ok) {
           const data = await res.json();
@@ -70,9 +75,12 @@ export default function CommentSection({ postId }) {
         return;
       }
 
-      const res = await fetch(`/api/comment/likeComment/${commentId}`, {
-        method: "PUT",
-      });
+      const res = await fetch(
+        `${API_URL}/api/comment/likeComment/${commentId}`,
+        {
+          method: "PUT",
+        }
+      );
 
       if (res.ok) {
         const data = await res.json();
@@ -109,9 +117,12 @@ export default function CommentSection({ postId }) {
         return;
       }
 
-      const res = await fetch(`/api/comment/deleteComment/${commentId}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${API_URL}/api/comment/deleteComment/${commentId}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (res.ok) {
         const data = await res.json();

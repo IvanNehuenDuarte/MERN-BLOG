@@ -4,6 +4,9 @@ import { Button, Modal, Table } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FaCheck, FaTimes } from "react-icons/fa";
 
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL;
+
 export default function DashUsers() {
   const { currentUser } = useSelector((state) => state.user);
 
@@ -15,7 +18,7 @@ export default function DashUsers() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`/api/user/getusers`);
+        const res = await fetch(`${API_URL}/api/user/getusers`);
         const data = await res.json();
 
         if (res.ok) {
@@ -38,7 +41,9 @@ export default function DashUsers() {
     const startIndex = users.length;
 
     try {
-      const res = await fetch(`/api/user/getusers?startIndex=${startIndex}`);
+      const res = await fetch(
+        `${API_URL}/api/user/getusers?startIndex=${startIndex}`
+      );
 
       if (!res.ok) {
         throw new Error("Network response was not ok");
@@ -58,7 +63,7 @@ export default function DashUsers() {
 
   const handleDeleteUser = async () => {
     try {
-      const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
+      const res = await fetch(`${API_URL}/api/user/delete/${userIdToDelete}`, {
         method: "DELETE",
       });
 

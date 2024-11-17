@@ -22,6 +22,9 @@ import {
   signOutSuccess,
 } from "../redux/user/userSlice.js";
 
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL;
+
 export default function DashProfile() {
   const { currentUser, error, loading } = useSelector((state) => state.user);
 
@@ -128,7 +131,7 @@ export default function DashProfile() {
 
     try {
       dispatch(updateStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`${API_URL}/api/user/update/${currentUser._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -156,7 +159,7 @@ export default function DashProfile() {
 
     try {
       dispatch(deleteUseStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`${API_URL}/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
       });
 
@@ -174,7 +177,7 @@ export default function DashProfile() {
 
   const handleSignOut = async () => {
     try {
-      const res = await fetch("/api/user/signout", {
+      const res = await fetch(`${API_URL}/api/user/signout`, {
         method: "POST",
       });
 

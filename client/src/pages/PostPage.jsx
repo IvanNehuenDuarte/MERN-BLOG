@@ -5,6 +5,9 @@ import CallToAction from "../components/CallToAction.jsx";
 import CommentSection from "../components/CommentSection.jsx";
 import PostCard from "../components/PostCard.jsx";
 
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL;
+
 export default function PostPage() {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
@@ -17,7 +20,9 @@ export default function PostPage() {
       try {
         setLoading(true);
 
-        const res = await fetch(`/api/post/getposts?slug=${postSlug}`);
+        const res = await fetch(
+          `${API_URL}/api/post/getposts?slug=${postSlug}`
+        );
         const data = await res.json();
 
         if (!res.ok) {
@@ -42,7 +47,7 @@ export default function PostPage() {
   useEffect(() => {
     try {
       const fetchRecentPosts = async () => {
-        const res = await fetch(`/api/post/getposts?limit=3`);
+        const res = await fetch(`${API_URL}/api/post/getposts?limit=3`);
         const data = await res.json();
 
         if (res.ok) {

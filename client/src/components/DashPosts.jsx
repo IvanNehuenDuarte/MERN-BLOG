@@ -4,6 +4,9 @@ import { Button, Modal, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
+// URL
+const API_URL = import.meta.env.VITE_BACK_URL;
+
 export default function DashPosts() {
   const { currentUser } = useSelector((state) => state.user);
 
@@ -15,7 +18,9 @@ export default function DashPosts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`/api/post/getposts?userId=${currentUser._id}`);
+        const res = await fetch(
+          `${API_URL}/api/post/getposts?userId=${currentUser._id}`
+        );
         const data = await res.json();
 
         if (res.ok) {
@@ -39,7 +44,7 @@ export default function DashPosts() {
 
     try {
       const res = await fetch(
-        `/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`
+        `${API_URL}/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`
       );
 
       if (!res.ok) {
@@ -63,7 +68,7 @@ export default function DashPosts() {
 
     try {
       const res = await fetch(
-        `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
+        `${API_URL}/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
         {
           method: "DELETE",
         }
