@@ -40,6 +40,14 @@ app.use((error, req, res, next) => {
   });
 });
 
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "https://mate-script.vercel.app/", // Cambia por la URL de tu frontend
+    credentials: true,
+  })
+);
+
 // Ruta raíz
 app.get("/", (req, res) => {
   res.send("¡Backend funcionando correctamente!");
