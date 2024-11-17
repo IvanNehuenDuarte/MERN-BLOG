@@ -6,7 +6,7 @@ import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
 import postRoutes from "./routes/post.route.js";
 import commentRoutes from "./routes/comment.route.js";
-import categoryRoute from "./routes/category.route.js"
+import categoryRoute from "./routes/category.route.js";
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
-app.use("/api/category", categoryRoute)
+app.use("/api/category", categoryRoute);
 
 // MIDDLEWARE
 app.use((error, req, res, next) => {
@@ -38,6 +38,11 @@ app.use((error, req, res, next) => {
     statusCode,
     message,
   });
+});
+
+// Ruta raíz
+app.get("/", (req, res) => {
+  res.send("¡Backend funcionando correctamente!");
 });
 
 const PORT = process.env.PORT || 3000;
