@@ -24,14 +24,15 @@ export default function UpdatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
+  const [publishError, setPublishError] = useState(null);
+  const { postId } = useParams();
+  const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
-    category: "uncategorized",
+    category: "",
     content: "",
     image: "",
   });
-  const [publishError, setPublishError] = useState(null);
-  const { postId } = useParams();
 
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
@@ -52,7 +53,7 @@ export default function UpdatePost() {
           setFormData({
             id: postId,
             title: post.title || "",
-            category: (post.category || "").toLowerCase(),
+            category: post.category?._id || "",
             content: post.content || "",
             image: post.image || "",
           });
@@ -64,6 +65,20 @@ export default function UpdatePost() {
 
     fetchPost();
   }, [postId]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch("/api/category/getcategories"); // Llama a la nueva ruta
+        const data = await res.json();
+        setCategories(data.categories); // Actualiza el estado con las categorías del backend
+      } catch (error) {
+        console.log("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories(); // Llama a la función cuando el componente se monta
+  }, []);
 
   const handleUpdloadImage = async () => {
     try {
@@ -132,7 +147,9 @@ export default function UpdatePost() {
   };
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
-      <h1 className="text-center text-3xl my-7 font-semibold">Update post</h1>
+      <h1 className="text-center text-3xl my-7 font-semibold">
+        Actualizar Post
+      </h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
           <TextInput
@@ -152,13 +169,14 @@ export default function UpdatePost() {
             }
             value={formData.category}
           >
-            <option value="uncategorized">Select a category</option>
-            <option value="javascript">JavaScript</option>
-            <option value="reactjs">ReactJs</option>
-            <option value="nodejs">NodeJs</option>
-            <option value="express">Express</option>
-            <option value="threejs">ThreeJs</option>
-            <option value="coffee">Coffee</option>
+            {categories.map((category) => (
+              <option
+                key={category._id || category}
+                value={category._id || category}
+              >
+                {category.name}
+              </option>
+            ))}
           </Select>
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
@@ -210,7 +228,7 @@ export default function UpdatePost() {
           }}
         />
         <Button type="submit" gradientDuoTone="purpleToPink">
-          Update post
+          Actualizar Post
         </Button>
         {publishError && (
           <Alert className="mt-5" color="failure">

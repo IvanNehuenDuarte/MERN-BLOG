@@ -6,7 +6,7 @@ export default function About() {
       <div className="max-w-2xl mx-auto p-3">
         <div className="">
           <h1 className="text-3xl font-semibold text-center my-7">
-            About Code Planet
+            Sobre Code Planet
           </h1>
           <div className="text-md text-gray-500 dark:text-gray-300 flex flex-col gap-6 tracking-widest">
             <p className="">

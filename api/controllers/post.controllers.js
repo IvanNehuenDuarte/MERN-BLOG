@@ -1,6 +1,24 @@
 import Post from "../models/post.model.js";
 import { errorHandler } from "../utils/error.js";
 
+const generateUniqueSlug = async (title) => {
+  let baseSlug = title
+    .toLowerCase()
+    .split(" ")
+    .join("-")
+    .replace(/[^a-zA-Z0-9-]/g, ""); // Genera un slug base
+
+  let uniqueSlug = baseSlug;
+  let counter = 1;
+
+  while (await Post.findOne({ slug: uniqueSlug })) {
+    uniqueSlug = `${baseSlug}-${counter}`; // Agrega un sufijo numérico si el slug ya existe
+    counter++;
+  }
+
+  return uniqueSlug;
+};
+
 export const create = async (req, res, next) => {
   if (!req.user.isAdmin) {
     return next(errorHandler(403, "You are not allowed to create a post"));
@@ -9,11 +27,7 @@ export const create = async (req, res, next) => {
     return next(errorHandler(400, "Please provide all required fields"));
   }
 
-  const slug = req.body.title
-    .split(" ")
-    .join("-")
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9-]/g, "");
+  const slug = await generateUniqueSlug(req.body.title); // Generar slug único
 
   const newPost = new Post({
     ...req.body,
@@ -51,7 +65,8 @@ export const getPosts = async (req, res, next) => {
     })
       .sort({ updateAt: sortDirection })
       .skip(startIndex)
-      .limit(limit);
+      .limit(limit)
+      .populate("category", "name");
 
     const totalPosts = await Post.countDocuments();
 

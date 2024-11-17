@@ -57,7 +57,7 @@ export default function DashSidebar() {
                 icon={HiChartPie}
                 as="div"
               >
-                Dashboard
+                Panel
               </Sidebar.Item>
             </Link>
           )}
@@ -69,7 +69,7 @@ export default function DashSidebar() {
               labelColor="dark"
               as="div"
             >
-              Profile
+              Perfil
             </Sidebar.Item>
           </Link>
 
@@ -93,7 +93,7 @@ export default function DashSidebar() {
                   icon={HiOutlineUserGroup}
                   as="div"
                 >
-                  Users
+                  Usuarios
                 </Sidebar.Item>
               </Link>
 
@@ -103,7 +103,7 @@ export default function DashSidebar() {
                   icon={HiAnnotation}
                   as="div"
                 >
-                  Comments
+                  Comentarios
                 </Sidebar.Item>
               </Link>
             </>
@@ -114,7 +114,7 @@ export default function DashSidebar() {
             className="cursor-pointer"
             onClick={handleSignOut}
           >
-            Sign Out
+            Salir
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>

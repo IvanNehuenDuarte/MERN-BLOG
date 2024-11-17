@@ -89,13 +89,13 @@ export default function DashPosts() {
         <>
           <Table hoverable className="shadow-md">
             <Table.Head>
-              <Table.HeadCell>Date update</Table.HeadCell>
-              <Table.HeadCell>Post image</Table.HeadCell>
-              <Table.HeadCell>Post title</Table.HeadCell>
-              <Table.HeadCell>Category</Table.HeadCell>
-              <Table.HeadCell>Delete</Table.HeadCell>
+              <Table.HeadCell>FECHA ACTUALIZACIÓN</Table.HeadCell>
+              <Table.HeadCell>Imagen</Table.HeadCell>
+              <Table.HeadCell>Título</Table.HeadCell>
+              <Table.HeadCell>Etiqueta</Table.HeadCell>
+              <Table.HeadCell>Eliminar</Table.HeadCell>
               <Table.HeadCell>
-                <span>Edit</span>
+                <span>Editar</span>
               </Table.HeadCell>
             </Table.Head>
             {userPosts.map((post) => (
@@ -127,7 +127,9 @@ export default function DashPosts() {
                     </Link>
                   </Table.Cell>
 
-                  <Table.Cell>{post.category}</Table.Cell>
+                  <Table.Cell>
+                    {post.category?.name || "Sin etiqueta"}
+                  </Table.Cell>
 
                   <Table.Cell>
                     <span
@@ -137,7 +139,7 @@ export default function DashPosts() {
                       }}
                       className="font-medium text-red-500 hover:underline cursor-pointer"
                     >
-                      Delete
+                      Eliminar
                     </span>
                   </Table.Cell>
 
@@ -146,7 +148,7 @@ export default function DashPosts() {
                       className="text-teal-300 hover:underline"
                       to={`/update-post/${post._id}`}
                     >
-                      <span>Edit</span>
+                      <span>Editar</span>
                     </Link>
                   </Table.Cell>
                 </Table.Row>
@@ -158,12 +160,12 @@ export default function DashPosts() {
               className="w-full text-teal-500 self-center text-sm py-7"
               onClick={handleShowMore}
             >
-              Show More
+              Mostrar más
             </button>
           )}
         </>
       ) : (
-        <p>You have no posts yet!</p>
+        <p>Aún no tienes posts</p>
       )}
 
       <Modal

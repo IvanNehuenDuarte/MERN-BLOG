@@ -81,9 +81,9 @@ export default function Header() {
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
       >
         <span className="px-2 py-1 bg-gradient-to-r from-teal-300 via-teal-500 to-teal-800 rounded-lg text-white">
-          CODE{" "}
+          Mate{" "}
         </span>
-        PLANET
+        Script
       </Link>
       <form onSubmit={handleSubmit}>
         <TextInput
@@ -122,15 +122,15 @@ export default function Header() {
               </span>
             </Dropdown.Header>
             <Link to={"/dashboard?tab=profile"}>
-              <Dropdown.Item>Profile</Dropdown.Item>
+              <Dropdown.Item>Perfíl</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
-            <Dropdown.Item onClick={handleSignOut}>Sign out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignOut}>Salir</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to="/sign-in">
             <Button gradientDuoTone="greenToBlue" outline>
-              Sign In
+              Ingresar
             </Button>
           </Link>
         )}
@@ -138,13 +138,13 @@ export default function Header() {
       </div>
       <Navbar.Collapse>
         <Navbar.Link active={path === "/"} as={"div"}>
-          <Link to="/">Home</Link>
+          <Link to="/">Inicio</Link>
         </Navbar.Link>
         <Navbar.Link active={path === "/about"} as={"div"}>
-          <Link to="/about">About</Link>
+          <Link to="/about">Acerca de</Link>
         </Navbar.Link>
         <Navbar.Link active={path === "/projects"} as={"div"}>
-          <Link to="/projects">Projects</Link>
+          <Link to="/projects">Proyectos</Link>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>

@@ -13,7 +13,6 @@ const postSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique: true,
     },
     image: {
       type: String,
@@ -22,12 +21,11 @@ const postSchema = new mongoose.Schema(
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Category'  // Referencia al modelo Category
+      ref: "Category", // Referencia al modelo Category
     },
     slug: {
       type: String,
       required: true,
-      unique: true,
     },
   },
   { timestamps: true }

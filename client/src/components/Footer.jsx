@@ -14,14 +14,14 @@ export default function FooterCom() {
               className="self-center whitespace-nowrap text-lg sm:text-xl font-semibold dark:text-white"
             >
               <span className="px-2 py-1 bg-gradient-to-r from-teal-300 via-teal-500 to-teal-800 rounded-lg text-white">
-                Programmer{" "}
+                Mate{" "}
               </span>
-              Blog
+              Script
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3">
             <div className="">
-              <Footer.Title title="About" />
+              <Footer.Title title="Acerca de" />
               <Footer.LinkGroup col>
                 <Footer.Link
                   href="https://portfolio-ivan-duarte.vercel.app/"
@@ -42,7 +42,7 @@ export default function FooterCom() {
             </div>
 
             <div className="">
-              <Footer.Title title="Follow us" />
+              <Footer.Title title="Sigueme" />
               <Footer.LinkGroup col>
                 <Footer.Link
                   href="https://github.com/IvanNehuenDuarte?tab=repositories"
@@ -65,10 +65,10 @@ export default function FooterCom() {
         </div>
         <Footer.Divider />
         <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
-          <Footer.Icon
+          {/* <Footer.Icon
             href="https://www.instagram.com/ivan_nehuen_duarte/"
             icon={BsInstagram}
-          />
+          /> */}
           <Footer.Icon href="https://x.com/IvanNehuenD" icon={BsTwitterX} />
         </div>
       </div>

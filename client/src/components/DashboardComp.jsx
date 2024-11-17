@@ -79,7 +79,9 @@ export default function DashboardComp() {
         <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md">
           <div className="flex justify-between">
             <div className="">
-              <h3 className="text-gray-500 text-md uppercase">Total Users</h3>
+              <h3 className="text-gray-500 text-md uppercase">
+                Usuarios Totales
+              </h3>
               <p className="text-2xl">{totalUsers}</p>
             </div>
             <HiOutlineUserGroup className="bg-teal-600 text-white rounded-full text-5xl p-3 shadow-lg" />
@@ -89,15 +91,13 @@ export default function DashboardComp() {
               <HiArrowNarrowUp />
               {lastMonthUsers}
             </span>
-            <div className="text-gray-500">Last Month</div>
+            <div className="text-gray-500">Úiltimo Mes</div>
           </div>
         </div>
         <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md">
           <div className="flex justify-between">
             <div className="">
-              <h3 className="text-gray-500 text-md uppercase">
-                Total Comments
-              </h3>
+              <h3 className="text-gray-500 text-md uppercase">Comentarios</h3>
               <p className="text-2xl">{totalComments}</p>
             </div>
             <HiAnnotation className="bg-indigo-600 text-white rounded-full text-5xl p-3 shadow-lg" />
@@ -107,13 +107,13 @@ export default function DashboardComp() {
               <HiArrowNarrowUp />
               {lastMonthComments}
             </span>
-            <div className="text-gray-500">Last Month</div>
+            <div className="text-gray-500">Último Mes</div>
           </div>
         </div>
         <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md">
           <div className="flex justify-between">
             <div className="">
-              <h3 className="text-gray-500 text-md uppercase">Total Posts</h3>
+              <h3 className="text-gray-500 text-md uppercase">Posts</h3>
               <p className="text-2xl">{totalPosts}</p>
             </div>
             <HiDocumentText className="bg-lime-600 text-white rounded-full text-5xl p-3 shadow-lg" />
@@ -123,7 +123,7 @@ export default function DashboardComp() {
               <HiArrowNarrowUp />
               {lastMonthPosts}
             </span>
-            <div className="text-gray-500">Last Month</div>
+            <div className="text-gray-500">Último Mes</div>
           </div>
         </div>
       </div>
@@ -133,15 +133,15 @@ export default function DashboardComp() {
          p-2 rounded-md dark:bg-gray-800"
         >
           <div className="flex justify-between  p-3 text-sm font-semibold">
-            <h1 className="text-center p-2">Recent Users</h1>
+            <h1 className="text-center p-2">Usuarios Recientes</h1>
             <Button outline gradientDuoTone="purpleToPink">
-              <Link to={`/dashboard?tab=users`}>See All</Link>
+              <Link to={`/dashboard?tab=users`}>Ver Todo</Link>
             </Button>
           </div>
           <Table hoverable>
             <Table.Head>
-              <Table.HeadCell>User Image</Table.HeadCell>
-              <Table.HeadCell>User Name</Table.HeadCell>
+              <Table.HeadCell>Imagen de usuario</Table.HeadCell>
+              <Table.HeadCell>Nombre de usuario</Table.HeadCell>
             </Table.Head>
             {users &&
               users.map((user) => (
@@ -165,15 +165,15 @@ export default function DashboardComp() {
          p-2 rounded-md dark:bg-gray-800"
         >
           <div className="flex justify-between  p-3 text-sm font-semibold">
-            <h1 className="text-center p-2">Recent Comments</h1>
+            <h1 className="text-center p-2">Comentarios Recientes</h1>
             <Button outline gradientDuoTone="purpleToPink">
-              <Link to={`/dashboard?tab=comments`}>See All</Link>
+              <Link to={`/dashboard?tab=comments`}>Ver Todo</Link>
             </Button>
           </div>
           <Table hoverable>
             <Table.Head>
-              <Table.HeadCell>Comment</Table.HeadCell>
-              <Table.HeadCell>Likes</Table.HeadCell>
+              <Table.HeadCell>Comentarios</Table.HeadCell>
+              <Table.HeadCell>Me Gusta</Table.HeadCell>
             </Table.Head>
             {comments &&
               comments.map((comment) => (
@@ -193,16 +193,16 @@ export default function DashboardComp() {
          p-2 rounded-md dark:bg-gray-800"
         >
           <div className="flex justify-between  p-3 text-sm font-semibold">
-            <h1 className="text-center p-2">Recent Posts</h1>
+            <h1 className="text-center p-2">Posts Recientes</h1>
             <Button outline gradientDuoTone="purpleToPink">
-              <Link to={`/dashboard?tab=posts`}>See All</Link>
+              <Link to={`/dashboard?tab=posts`}>Ver Todo</Link>
             </Button>
           </div>
           <Table hoverable>
             <Table.Head>
-              <Table.HeadCell>Post Image</Table.HeadCell>
-              <Table.HeadCell>Title</Table.HeadCell>
-              <Table.HeadCell>Category</Table.HeadCell>
+              <Table.HeadCell>Imagen</Table.HeadCell>
+              <Table.HeadCell>Título</Table.HeadCell>
+              <Table.HeadCell>Etiqueta</Table.HeadCell>
             </Table.Head>
             {posts &&
               posts.map((post) => (
@@ -216,7 +216,9 @@ export default function DashboardComp() {
                       />
                     </Table.Cell>
                     <Table.Cell className="w-96">{post.title}</Table.Cell>
-                    <Table.Cell className="w-5">{post.category}</Table.Cell>
+                    <Table.Cell className="w-5">
+                      {post.category?.name || "Sin categoría"}
+                    </Table.Cell>
                   </Table.Row>
                 </Table.Body>
               ))}

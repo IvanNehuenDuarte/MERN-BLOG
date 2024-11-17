@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { Alert, Button, FileInput, Select, TextInput, Modal } from "flowbite-react";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  Button,
+  FileInput,
+  Select,
+  TextInput,
+  Modal,
+} from "flowbite-react";
 import {
   getDownloadURL,
   getStorage,
@@ -26,17 +33,9 @@ export default function CreatePost() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({ content: "", categories: [] });
   const [publishError, setPublishError] = useState(null);
-  const [categories, setCategories] = useState([
-    "Uncategorized",
-"JavaScript",
-"ReactJs",
-"NodeJs",
-"Express",
-"ThreeJs",
-"Coffee",
-  ])
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [newCategory, setNewCategory] = useState("")
+  const [categories, setCategories] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newCategory, setNewCategory] = useState("");
 
   const navigate = useNavigate();
 
@@ -106,24 +105,55 @@ export default function CreatePost() {
     }
   };
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch("/api/category/getcategories");
+        const data = await res.json();
+        if (Array.isArray(data.categories)) {
+          setCategories(data.categories);
+        } else {
+          console.error("Categories data format is invalid:", data);
+        }
+      } catch (error) {
+        console.log("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories(); // Llama a la función cuando el componente se monta
+  }, []);
+
   const handleAddCategory = async () => {
     if (newCategory.trim()) {
-      setCategories([...categories, newCategory.trim()])
-      setFormData({ ...formData, categories: [...formData.categories, newCategory.trim()] });
-      setNewCategory("")
-      setIsModalOpen(false);
-    }
+      try {
+        // Enviar nueva categoría al backend
+        const res = await fetch("/api/category/addcategory", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: newCategory.trim() }),
+        });
 
-    try {
-      await fetch('/api/category/addcategory', {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: newCategory.trim() })
-      })
-    } catch (error) {
-      console.log(error);
+        if (!res.ok) {
+          console.error("Error adding category");
+          return;
+        }
+
+        const savedCategory = await res.json();
+
+        // Actualizar el estado con la categoría devuelta por el backend
+        setCategories([...categories, savedCategory]);
+        setFormData({
+          ...formData,
+          category: savedCategory._id, // Usar el _id devuelto por el backend
+        });
+
+        setNewCategory("");
+        setIsModalOpen(false);
+      } catch (error) {
+        console.error("Error adding category:", error);
+      }
     }
-  }
+  };
 
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen pt-14">
@@ -143,17 +173,19 @@ export default function CreatePost() {
           <Select
             onChange={(e) => {
               if (e.target.value === "addCategory") {
-                setIsModalOpen(true)
+                setIsModalOpen(true);
               } else {
-                setFormData({ ...formData, category: e.target.value})
+                setFormData({ ...formData, category: e.target.value });
               }
             }}
           >
-            <option value='uncategorized'>Select a category</option>
-            {categories.map((category, index) => (
-              <option key={index} value={category}>{category}</option>
+            <option value="uncategorized">Select a category</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.name}
+              </option>
             ))}
-          <option value="addCategory">Add Category</option>
+            <option value="addCategory">Add Category</option>
           </Select>
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
@@ -212,7 +244,12 @@ export default function CreatePost() {
       <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Modal.Header>Add New Category</Modal.Header>
         <Modal.Body>
-          <TextInput type="text" placeholder="New Category" value={newCategory} onChange={(e) => setNewCategory(e.target.value)}/>
+          <TextInput
+            type="text"
+            placeholder="New Category"
+            value={newCategory}
+            onChange={(e) => setNewCategory(e.target.value)}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleAddCategory}>Add</Button>

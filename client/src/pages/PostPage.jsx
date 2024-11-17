@@ -74,7 +74,7 @@ export default function PostPage() {
         className="self-center mt-5"
       >
         <Button color="gray" pill size="xs">
-          {post && post.category}
+          {(post && post.category?.name) || "Sin categoría"}
         </Button>
       </Link>
 

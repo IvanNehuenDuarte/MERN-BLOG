@@ -88,12 +88,12 @@ export default function DashComments() {
         <>
           <Table hoverable className="shadow-md">
             <Table.Head>
-              <Table.HeadCell>Date updated</Table.HeadCell>
-              <Table.HeadCell>Comment content</Table.HeadCell>
-              <Table.HeadCell>Number of likes</Table.HeadCell>
+              <Table.HeadCell>Fecha Actualización</Table.HeadCell>
+              <Table.HeadCell>Contenido</Table.HeadCell>
+              <Table.HeadCell>Like</Table.HeadCell>
               <Table.HeadCell>PostId</Table.HeadCell>
               <Table.HeadCell>UserId</Table.HeadCell>
-              <Table.HeadCell>Delete</Table.HeadCell>
+              <Table.HeadCell>Eliminar</Table.HeadCell>
             </Table.Head>
             {comments.map((comment) => (
               <Table.Body className="divide-y" key={comment._id}>
@@ -130,12 +130,12 @@ export default function DashComments() {
               className="w-full text-teal-500 self-center text-sm py-7"
               onClick={handleShowMore}
             >
-              Show More
+              Mostrar más
             </button>
           )}
         </>
       ) : (
-        <p>You have no comments yet!</p>
+        <p>¡Aún no tienes comentarios!</p>
       )}
 
       <Modal
@@ -150,15 +150,15 @@ export default function DashComments() {
           <div className="text-center">
             <HiOutlineExclamationCircle className="h-14 w-14 text-red-500 dark:text-red-700 mb-4 mx-auto" />
             <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this comments?
+              ¿Estás seguro de que deseas eliminar estos comentarios?
             </h3>
             <div className="flex justify-center gap-6">
               <Button color="failure" onClick={handleDeleteComment}>
-                Yes, I'm sure
+                Sí, estoy seguro
               </Button>
 
               <Button color="gray" onClick={() => setShowModal(false)}>
-                Cancel
+                Cancelar
               </Button>
             </div>
           </div>
