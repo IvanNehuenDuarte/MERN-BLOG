@@ -46,7 +46,7 @@ export default function OAuth() {
       onClick={handleGoogleClick}
     >
       <AiFillGoogleCircle className="w-6 h-6 mr-2" />
-      Continue with Google
+      Continuar con Google
     </Button>
   );
 }
