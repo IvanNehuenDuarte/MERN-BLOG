@@ -21,7 +21,11 @@ export default function PostPage() {
         setLoading(true);
 
         const res = await fetch(
-          `${API_URL}/api/post/getposts?slug=${postSlug}`
+          `${API_URL}/api/post/getposts?slug=${postSlug}`,
+          {
+            method: "GET",
+            credentials: "include", // Solo si usas cookies o autenticación
+          }
         );
         const data = await res.json();
 
