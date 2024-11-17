@@ -33,7 +33,7 @@ app.use("/api/category", categoryRoute);
 const cors = require("cors");
 app.use(
   cors({
-    origin: "https://mate-script.vercel.app/",
+    origin: "https://mate-script.vercel.app",
     credentials: true,
   })
 );
