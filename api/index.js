@@ -9,6 +9,8 @@ import commentRoutes from "./routes/comment.route.js";
 import categoryRoute from "./routes/category.route.js";
 import cors from "cors";
 
+const app = express();
+
 //Cors config
 const corsOptions = {
   origin: process.env.FRONT_URL,
@@ -29,8 +31,6 @@ app.use((error, req, res, next) => {
     message,
   });
 });
-
-const app = express();
 
 mongoose
   .connect(process.env.DB_URL)
