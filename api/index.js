@@ -9,6 +9,27 @@ import commentRoutes from "./routes/comment.route.js";
 import categoryRoute from "./routes/category.route.js";
 import cors from "cors";
 
+//Cors config
+const corsOptions = {
+  origin: process.env.FRONT_URL,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Permite cookies o credenciales
+};
+
+app.use(cors(corsOptions));
+
+// MIDDLEWARE
+app.use((error, req, res, next) => {
+  const statusCode = error.statusCode || 500;
+  const message = error.message || "Internal Server Error";
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
+
 const app = express();
 
 mongoose
@@ -29,25 +50,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 app.use("/api/category", categoryRoute);
-
-// MIDDLEWARE
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://mate-script.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
-
-app.use((error, req, res, next) => {
-  const statusCode = error.statusCode || 500;
-  const message = error.message || "Internal Server Error";
-  res.status(statusCode).json({
-    success: false,
-    statusCode,
-    message,
-  });
-});
 
 // Ruta raíz
 app.get("/", (req, res) => {
