@@ -16,7 +16,11 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/user/${comment.userId}`);
+        const res = await fetch(`${API_URL}/api/user/${comment.userId}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // Incluye cookies}
+        });
 
         const data = await res.json();
 
@@ -39,15 +43,14 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
     try {
       const res = await fetch(
         `${API_URL}/api/comment/editComment/${comment._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include", // Incluye cookies}
           },
           body: JSON.stringify({
             content: editedContent,
           }),
-        }
       );
 
       if (res.ok) {

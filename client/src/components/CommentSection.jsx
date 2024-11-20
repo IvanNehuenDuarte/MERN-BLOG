@@ -30,7 +30,9 @@ export default function CommentSection({ postId }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${currentUser.token}`,
         },
+        credentials: "include", // Incluye cookies
         body: JSON.stringify({
           content: comment,
           postId,
@@ -54,7 +56,12 @@ export default function CommentSection({ postId }) {
     const getComments = async () => {
       try {
         const res = await fetch(
-          `${API_URL}/api/comment/getPostComments/${postId}`
+          `${API_URL}/api/comment/getPostComments/${postId}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include", // Incluye cookies}
+          }
         );
 
         if (res.ok) {
@@ -79,6 +86,11 @@ export default function CommentSection({ postId }) {
         `${API_URL}/api/comment/likeComment/${commentId}`,
         {
           method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+          credentials: "include", // Incluye cookies
         }
       );
 
@@ -121,6 +133,11 @@ export default function CommentSection({ postId }) {
         `${API_URL}/api/comment/deleteComment/${commentId}`,
         {
           method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+          credentials: "include", // Incluye cookies
         }
       );
 
