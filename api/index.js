@@ -8,12 +8,6 @@ import postRoutes from "./routes/post.route.js";
 import commentRoutes from "./routes/comment.route.js";
 import categoryRoute from "./routes/category.route.js";
 import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
-
-// Configuración para ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -52,14 +46,6 @@ app.use("/api/category", categoryRoute);
 // Ruta raíz
 app.get("/", (req, res) => {
   res.send("¡Backend funcionando correctamente!");
-});
-
-// Sirve archivos estáticos del frontend
-app.use(express.static(path.join(__dirname, "../client/dist")));
-
-// Maneja todas las rutas con el archivo index.html del frontend
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
 });
 
 mongoose
