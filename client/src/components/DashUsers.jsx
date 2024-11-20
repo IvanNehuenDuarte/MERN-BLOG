@@ -18,7 +18,14 @@ export default function DashUsers() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/user/getusers`);
+        const res = await fetch(`${API_URL}/api/user/getusers`, {
+          method: "GET",
+          credentials: "include", // Esto envía las cookies
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`, // Incluye el token
+          },
+        });
         const data = await res.json();
 
         if (res.ok) {
@@ -42,7 +49,11 @@ export default function DashUsers() {
 
     try {
       const res = await fetch(
-        `${API_URL}/api/user/getusers?startIndex=${startIndex}`
+        `${API_URL}/api/user/getusers?startIndex=${startIndex}`,
+        {
+          method: "GET",
+          credentials: "include", // Envía cookies también aquí
+        }
       );
 
       if (!res.ok) {
