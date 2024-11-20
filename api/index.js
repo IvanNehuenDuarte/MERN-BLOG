@@ -32,6 +32,11 @@ app.use((error, req, res, next) => {
   });
 });
 
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+  next();
+});
+
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
