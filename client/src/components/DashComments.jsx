@@ -17,7 +17,11 @@ export default function DashComments() {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/comment/getcomments`);
+        const res = await fetch(`${API_URL}/api/comment/getcomments`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // Incluye cookies}
+        });
         const data = await res.json();
 
         if (res.ok) {
@@ -41,7 +45,12 @@ export default function DashComments() {
 
     try {
       const res = await fetch(
-        `${API_URL}/api/comment/getcomments?startIndex=${startIndex}`
+        `${API_URL}/api/comment/getcomments?startIndex=${startIndex}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // Incluye cookies}
+        }
       );
 
       if (!res.ok) {
