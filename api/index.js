@@ -21,7 +21,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// MIDDLEWARE
+// Middleware de manejo de errores
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500;
   const message = error.message || "Internal Server Error";
@@ -32,15 +32,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-mongoose
-  .connect(process.env.DB_URL)
-  .then(() => {
-    console.log("Connected to Mongoose");
-  })
-  .catch((error) => {
-    console.log(`Failed to connect to Mongoose, error message: ${error}`);
-  });
-
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
 
@@ -56,8 +48,13 @@ app.get("/", (req, res) => {
   res.send("¡Backend funcionando correctamente!");
 });
 
-const PORT = process.env.PORT || 3000;
+mongoose
+  .connect(process.env.DB_URL)
+  .then(() => {
+    console.log("Connected to Mongoose");
+  })
+  .catch((error) => {
+    console.log(`Failed to connect to Mongoose, error message: ${error}`);
+  });
 
-app.listen(PORT, () => {
-  console.log(`App listening on ${PORT}`);
-});
+export default app;
