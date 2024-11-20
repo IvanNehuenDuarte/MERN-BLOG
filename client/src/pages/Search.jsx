@@ -92,7 +92,11 @@ export default function Search() {
     const urlParams = new URLSearchParams(location.search);
     urlParams.set("startIndex", startIndex);
     const searchQuery = urlParams.toString();
-    const res = await fetch(`${API_URL}/api/post/getposts?${searchQuery}`);
+    const res = await fetch(`${API_URL}/api/post/getposts?${searchQuery}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include", // Include cookies if using authentication
+    });
     if (!res.ok) {
       return;
     }
