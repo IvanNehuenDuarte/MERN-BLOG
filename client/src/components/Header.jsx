@@ -33,6 +33,10 @@ export default function Header() {
     try {
       const res = await fetch(`${API_URL}/api/user/signout`, {
         method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        credentials: "include",
       });
 
       const data = await res.json();

@@ -161,6 +161,10 @@ export default function DashProfile() {
       dispatch(deleteUseStart());
       const res = await fetch(`${API_URL}/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+        credentials: "include",
       });
 
       const data = await res.json();
@@ -179,6 +183,10 @@ export default function DashProfile() {
     try {
       const res = await fetch(`${API_URL}/api/user/signout`, {
         method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        credentials: "include",
       });
 
       const data = await res.json();
