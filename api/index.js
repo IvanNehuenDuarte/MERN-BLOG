@@ -48,6 +48,14 @@ app.get("/", (req, res) => {
   res.send("¡Backend funcionando correctamente!");
 });
 
+// Ruta para servir el frontend
+const __dirname = path.resolve(); // Para obtener la ruta absoluta
+app.use(express.static(path.join(__dirname, "dist"))); // Sirve archivos estáticos del frontend
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "dist", "index.html")); // Redirige todas las rutas al frontend
+});
+
 mongoose
   .connect(process.env.DB_URL)
   .then(() => {
