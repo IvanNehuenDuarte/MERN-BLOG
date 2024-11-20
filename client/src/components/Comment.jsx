@@ -43,14 +43,14 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
     try {
       const res = await fetch(
         `${API_URL}/api/comment/editComment/${comment._id}`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include", // Incluye cookies}
-          },
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // Incluye cookies},
           body: JSON.stringify({
             content: editedContent,
           }),
+        }
       );
 
       if (res.ok) {
