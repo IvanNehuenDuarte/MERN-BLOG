@@ -135,6 +135,7 @@ export default function DashProfile() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${currentUser.token}`,
         },
         credentials: "include",
         body: JSON.stringify(formData),
