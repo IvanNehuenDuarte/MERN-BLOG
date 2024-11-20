@@ -55,11 +55,11 @@ app.get("/", (req, res) => {
 });
 
 // Sirve archivos estáticos del frontend
-app.use(express.static(path.join(__dirname, "client", "dist")));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // Maneja todas las rutas con el archivo index.html del frontend
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
 });
 
 mongoose
