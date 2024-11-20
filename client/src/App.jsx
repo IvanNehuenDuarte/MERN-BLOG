@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import About from "./pages/About";
@@ -18,7 +18,7 @@ import Search from "./pages/Search";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ScrollToTop />
       <Header />
       <Routes>
@@ -39,6 +39,6 @@ export default function App() {
         <Route path="/post/:postSlug" element={<PostPage />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
